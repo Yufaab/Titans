@@ -10,11 +10,6 @@
     "lint": "eslint src/**/*.js",
     "format": "prettier --write 'src/' --loglevel=silent"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "src/**/*.{js,jsx}": [
       "npm run test:lint -- --fix",
