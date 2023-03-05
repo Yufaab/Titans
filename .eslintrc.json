@@ -1,11 +1,11 @@
 {
-    "parser": "@babel/eslint-parser",
     "env": {
         "browser": true,
-        "es6": true
+        "es6": true,
+        "node": true
       },
-    "extends": ["airbnb", "plugin:react/recommended", "prettier"],
-    "plugins": ["react", "prettier"],
+    "extends": ["airbnb-base", "prettier"],
+    "plugins": ["prettier"],
     "rules": {
     }
 }
