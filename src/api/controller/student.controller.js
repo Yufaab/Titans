@@ -41,3 +41,12 @@ exports.signupStudent = async (req, res) => {
     res.status(StatusCodes.BAD_REQUEST).send();
   }
 };
+
+exports.updateData = async (req, res) => {
+  try {
+    const user = await Student.updateSchema(req.params.studentid, req.body);
+    res.status(StatusCodes.CREATED).send({ user });
+  } catch (e) {
+    res.status(StatusCodes.BAD_REQUEST).send();
+  }
+};

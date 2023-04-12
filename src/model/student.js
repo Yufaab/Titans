@@ -32,6 +32,50 @@ const studentSchema = new mongoose.Schema({
       minLength: 7,
       trim: true,
   },
+  examType: {
+    type: String,
+    required: false,
+    trim: true
+  },
+  rank: {
+    type: Number,
+    required: false,
+    trim: true
+  },
+  category: {
+    type: String,
+    required: false,
+    trim: true
+  },
+  categoryRank: {
+    type: Number,
+    required: false,
+    trim: true
+  },
+  gender: {
+    type: String,
+    required: false,
+    trim: true
+  },
+  disability: {
+    type: Boolean,
+    required: false,
+    trim: true
+  },
+  collegePreference: [{
+    name: {
+      type: String,
+      required: false,
+      trim: true
+    }
+  }],
+  branchPreference: [{
+    name: {
+      type: String,
+      required: false,
+      trim: true
+    }
+  }],
   tokens: [{
       token:{
           type: String,
@@ -76,6 +120,13 @@ studentSchema.statics.findByCredentials = async (email,password) => {
     }
   }
 
+  return user
+}
+
+studentSchema.statics.updateSchema = async function(id, data) {
+  const user = await Student.findByIdAndUpdate(id, {
+    ...data,
+  }, {new: true});
   return user
 }
 
