@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const { mongouri } = require('.vars.js');
+const { mongouri } = require('./vars');
 
 mongoose.connect(mongouri, {
-    useNewUrlParser: true,
-    // useCreateIndex: true
-})
+  useNewUrlParser: true,
+  // useCreateIndex: true
+});
