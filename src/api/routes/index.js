@@ -1,10 +1,8 @@
 const express = require('express');
-const httpStatus = require('http-status');
+const routesV1 = require('./v1');
 
 const router = express.Router();
 
-router.get('/app/health', (req, res) => {
-  res.send({ status: httpStatus.OK });
-});
+router.use(routesV1)
 
 module.exports = router;
