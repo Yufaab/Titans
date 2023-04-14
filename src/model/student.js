@@ -86,8 +86,6 @@ const studentSchema = new mongoose.Schema({
   timestamps: true
 })
 
-const Student = mongoose.model('Student', studentSchema)
-
 studentSchema.methods.toJSON = function (){
   const user = this
 
@@ -137,5 +135,7 @@ studentSchema.pre('save' , async function (next) {
   }
   next()
 })
+
+const Student = mongoose.model('Student', studentSchema)
 
 module.exports = Student
