@@ -8,6 +8,7 @@
     "plugins": ["prettier"],
     "rules": {
       "no-underscore-dangle" : "off",
-      "func-names": "off"
+      "func-names": "off",
+      "no-use-before-define":"off"
     }
 }

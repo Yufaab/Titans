@@ -38,7 +38,7 @@ exports.signupStudent = async (req, res) => {
     const token = await user.generateAuthToken();
     res.status(StatusCodes.CREATED).send({ user, token });
   } catch (e) {
-    res.status(StatusCodes.BAD_REQUEST).send();
+    res.status(StatusCodes.BAD_REQUEST).send(e);
   }
 };
 
