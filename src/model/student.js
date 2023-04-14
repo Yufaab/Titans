@@ -128,13 +128,13 @@ studentSchema.statics.updateSchema = async function(id, data) {
   return user
 }
 
-// studentSchema.pre('save' , async function (next) {
-//   const user = this
-//   if(user.isModified('password')){
-//       user.password = await bcrypt.hash(user.password, 8)
-//   }
-//   next()
-// })
+studentSchema.pre('save' , async function (next) {
+  const user = this
+  if(user.isModified('password')){
+      user.password = await bcrypt.hash(user.password, 8)
+  }
+  next()
+})
 
 const Student = mongoose.model('Student', studentSchema)
 
