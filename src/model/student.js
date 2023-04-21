@@ -6,75 +6,42 @@ const jwt = require('jsonwebtoken')
 const studentSchema = new mongoose.Schema({
   firstname: {
       type: String,
-      required: true,
+      required: [true, "Please provide your first name"],
       trim: true
   },
   lastname: {
     type: String,
-    required: true,
+    required: [false, "Please provide your last name"],
     trim: true
   },
   email:{
       type: String,
       unique: true,
-      required: true,
+      required: [true, "Please provide your email address"],
       trim: true,
       lowercase: true,
       validate(value) {
           if(!validator.isEmail(value)){
-              throw new Error('Invalid Email')
+              throw new Error('Please provide a valid Email')
           }
       }
   },
   password:{
       type: String,
-      required: false,
-      minLength: 7,
+      required: [true, "Please provide password"],
+      minLength: 8,
       trim: true,
   },
-  examType: {
-    type: String,
-    required: false,
-    trim: true
+  phone: {
+      type: Number,
+      required: [true, "Please provide your phone number"],
+      minLength: 10,
+      maxLength: 10
   },
-  rank: {
-    type: Number,
-    required: false,
-    trim: true
-  },
-  category: {
-    type: String,
-    required: false,
-    trim: true
-  },
-  categoryRank: {
-    type: Number,
-    required: false,
-    trim: true
-  },
-  gender: {
-    type: String,
-    required: false,
-    trim: true
-  },
-  disability: {
-    type: Boolean,
-    required: false,
-    trim: true
-  },
-  collegePreference: [{
-    name: {
-      type: String,
-      required: false,
-      trim: true
-    }
-  }],
-  branchPreference: [{
-    name: {
-      type: String,
-      required: false,
-      trim: true
-    }
+  getOrders: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Orders',
+    index: true
   }],
   tokens: [{
       token:{
