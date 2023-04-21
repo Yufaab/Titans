@@ -38,6 +38,11 @@ const studentSchema = new mongoose.Schema({
       minLength: 10,
       maxLength: 10
   },
+  getOrders: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Orders',
+    index: true
+  }],
   tokens: [{
       token:{
           type: String,

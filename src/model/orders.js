@@ -54,11 +54,11 @@ const orderSchema = new mongoose.Schema({
         required: false,
         trim: true
     },
-    orderedBy: [{
+    orderedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Student',
         index: true
-    }]
+    }
 },{
     timestamps: true
 })
