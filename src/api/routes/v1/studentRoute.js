@@ -1,5 +1,5 @@
 const express = require('express');
-const studentController = require('../../controller/student.controller');
+const studentController = require('../../controller/studentController');
 const studentAuth = require('../../middleware/auth');
 
 const router = express.Router();
@@ -9,5 +9,7 @@ router.route('/login').post(studentController.loginStudent);
 router.route('/signup').post(studentController.signupStudent);
 
 router.route('/:studentid/update').post(studentAuth, studentController.updateData);
+
+router.route('/order').post(studentAuth, studentController.createOrder);
 
 module.exports = router;
