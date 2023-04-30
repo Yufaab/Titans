@@ -10,4 +10,6 @@ router.route('/signup').post(studentController.signupStudent);
 
 router.route('/:studentid/update').post(studentAuth, studentController.updateData);
 
+router.route('/order').post(studentAuth, studentController.createOrder);
+
 module.exports = router;

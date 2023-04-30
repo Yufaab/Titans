@@ -57,7 +57,8 @@ const orderSchema = new mongoose.Schema({
     orderedBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Student',
-        index: true
+        index: true,
+        required: true
     }
 },{
     timestamps: true
