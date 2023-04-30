@@ -1,6 +1,6 @@
 const express = require('express');
 const httpStatus = require('http-status');
-const studentRoutes = require('./studentRoute')
+const studentRoutes = require('./student.route')
 
 const router = express.Router();
 

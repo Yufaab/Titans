@@ -64,6 +64,13 @@ const orderSchema = new mongoose.Schema({
     timestamps: true
 })
 
+orderSchema.statics.updateSchema = async function(id, data) {
+    const user = await Orders.findByIdAndUpdate(id, {
+      ...data,
+    }, {new: true});
+    return user
+  }
+
 const Orders = mongoose.model('Orders',orderSchema)
 
 module.exports = Orders
