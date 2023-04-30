@@ -28,13 +28,13 @@ const studentSchema = new mongoose.Schema({
   },
   password:{
       type: String,
-      required: [true, "Please provide password"],
+      required: [false, "Please provide password"],
       minLength: 8,
       trim: true,
   },
   phone: {
       type: Number,
-      required: [true, "Please provide your phone number"],
+      required: [false, "Please provide your phone number"],
       minLength: 10,
       maxLength: 10
   },
