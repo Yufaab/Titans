@@ -16,4 +16,6 @@ router.route('/order').post(studentAuth, studentController.createOrder);
 
 router.route('/order/:orderid').get(studentAuth, studentController.getOrder);
 
+router.route('/generate/result').get(studentAuth, studentController.generateCounsellingData);
+
 module.exports = router;

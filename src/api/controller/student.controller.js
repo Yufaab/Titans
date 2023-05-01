@@ -2,6 +2,7 @@ const StatusCodes = require('http-status');
 const Student = require('../../model/student');
 const GoogleLogin = require('../../utils/googleLogin');
 const Orders = require('../../model/orders');
+const Counselling2022 = require('../../model/counselling2022');
 
 exports.loginStudent = async (req, res) => {
   try {
@@ -138,6 +139,85 @@ exports.getOrder = async (req, res) => {
   } catch (err) {
     res.status(StatusCodes.BAD_REQUEST).send({
       status: 'Order not fetched'
+    });
+  }
+};
+
+exports.generateCounsellingData = async (req, res) => {
+  try {
+    const { rank, gender, seatType, institute, academicProgramName } = req.body;
+    const matcher = {
+      openingRank : { 
+        $gte: rank 
+      },
+      gender,
+      seatType,
+    };
+    if (institute) {
+      matcher.institute = {
+        $in: institute,
+      }
+    }
+    if (academicProgramName) {
+      matcher.academicProgramName = {
+        $in: academicProgramName
+      }
+    }
+    const dataPref = await Counselling2022.aggregate([
+      {
+        $match: matcher
+      },
+      {
+        $addFields : { 
+          "instituePref" : institute && { 
+            $indexOfArray: [ institute , "$institute" ] 
+          },
+          "academicProgramNamePref" : academicProgramName && {
+            $indexOfArray: [ academicProgramName, "$academicProgramName"]
+          }
+        }
+      },
+      {
+        $sort: { 
+          instituePref: 1,
+          academicProgramNamePref: 1,
+          openingRank: 1,
+        }
+      }
+    ]);
+    const dataCommon = await Counselling2022.aggregate([
+      {
+        $match: {
+          openingRank : { 
+            $gte: rank 
+          },
+          gender,
+          seatType,
+        }
+      },
+      {
+        $sort: {
+          openingRank: 1
+        }
+      },
+      {
+        $limit: 25
+      }
+    ])
+    const filterData = dataCommon.filter(data => 
+      !dataPref.some(obj => obj.openingRank === data.openingRank)
+    );
+    const collegeData = [ ...dataPref, ...filterData ];
+    res.status(StatusCodes.OK).send({
+      status: 'Result generated successfully',
+      data: {
+        collegeData,
+      }
+    })
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).send({
+      status: 'Data not found',
+      error: err,
     });
   }
 };

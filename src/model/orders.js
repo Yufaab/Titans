@@ -8,14 +8,16 @@ const orderSchema = new mongoose.Schema({
         maxLength: 7,
         minLength: 1
     },
-    category: {
+    seatType: {
         type: String,
+        enum: ['OPEN', 'OBC-NCL', 'SC', 'EWS', 'ST' , 'OPEN (PwD)', 'OBC-NCL (PwD)', 'SC (PwD)', 'EWS (PwD)', 'ST (PwD)'],
         trim: true,
         required: [true, "Please choose your category"],
     },
     gender: {
         type: String,
-        required: false,
+        enum: [ 'Gender-Neutral', 'Female-only (including Supernumerary)' ],
+        required: true,
         trim: true,
     },
     categoryRank: {
