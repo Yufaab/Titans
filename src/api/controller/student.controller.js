@@ -85,6 +85,7 @@ exports.updateData = async (req, res) => {
   }
 };
 
+// create a new order or update a existing order
 exports.createOrder = async (req, res) => {
   try {
     let saveOrder;
@@ -135,6 +136,40 @@ exports.getOrder = async (req, res) => {
   } catch (err) {
     res.status(StatusCodes.BAD_REQUEST).send({
       status: 'Order not fetched'
+    });
+  }
+};
+
+exports.getAllOrder = async (req, res) => {
+  try {
+    const orders = await Orders.find({
+      orderedBy: req.user._id
+    });
+    res.status(StatusCodes.OK).send({
+      status: 'Orders found',
+      data: {
+        orders,
+      }
+    })
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).send({
+      status: 'Order not fetched'
+    });
+  }
+};
+
+exports.deleteOrder = async (req, res) => {
+  try {
+    const order = await Orders.findByIdAndDelete(req.params.orderid);
+    res.status(StatusCodes.OK).send({
+      status: 'Orders found',
+      data: {
+        order,
+      }
+    })
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).send({
+      status: 'Order not deleted'
     });
   }
 };
