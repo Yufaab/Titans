@@ -108,7 +108,9 @@ exports.createOrder = async (req, res) => {
     }
     res.status(StatusCodes.OK).send({
       status: 'Order made successfully',
-      data: saveOrder.data,
+      data: {
+        order: saveOrder
+      },
       isNewMember: saveOrder.isNewMember
     });
   } catch (e) {
