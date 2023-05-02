@@ -85,13 +85,11 @@ exports.updateData = async (req, res) => {
   }
 };
 
-// create a new order or update a existing order
 exports.createOrder = async (req, res) => {
   try {
     let saveOrder;
-    // checks if the order is new
     if (req.body.isNewOrder) {
-      req.body.orderedBy = req.user._id; // orderby is extracted from the JWT token, refer to middleware
+      req.body.orderedBy = req.user._id;
       const order = new Orders(req.body);
       saveOrder = await order.save();
       await Student.findByIdAndUpdate(
@@ -105,7 +103,6 @@ exports.createOrder = async (req, res) => {
         }
       );
     }
-    // if the order is already present
     else {
       saveOrder = await Orders.updateSchema(req.body.orderid, req.body);
     }
@@ -113,7 +110,7 @@ exports.createOrder = async (req, res) => {
       status: 'Order made successfully',
       data: {
         order: saveOrder
-      }
+      },
     });
   } catch (e) {
     res.status(StatusCodes.BAD_REQUEST).send({
@@ -123,7 +120,6 @@ exports.createOrder = async (req, res) => {
   }
 };
 
-// fetch the order by orderid
 exports.getOrder = async (req, res) => {
   try {
     const order = await Orders.findById(req.params.orderid);
