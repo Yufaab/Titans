@@ -111,7 +111,6 @@ exports.createOrder = async (req, res) => {
       data: {
         order: saveOrder
       },
-      isNewMember: saveOrder.isNewMember
     });
   } catch (e) {
     res.status(StatusCodes.BAD_REQUEST).send({
