@@ -31,6 +31,8 @@
     "jsonwebtoken": "^9.0.0",
     "mongo": "^0.1.0",
     "mongoose": "^7.0.0",
+    "razorpay": "^2.8.6",
+    "shortid": "^2.2.16",
     "stream": "^0.0.2",
     "validator": "^13.9.0"
   },

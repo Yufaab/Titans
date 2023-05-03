@@ -1,8 +1,11 @@
 const StatusCodes = require('http-status');
+const Razorpay = require('razorpay');
+const shortid = require('shortid');
 const Student = require('../../model/student');
 const GoogleLogin = require('../../utils/googleLogin');
 const Orders = require('../../model/orders');
 const Counselling2022 = require('../../model/counselling2022');
+const { rpayKey, rpaySecret, rpayMerchant } = require('../../config/vars');
 
 exports.loginStudent = async (req, res) => {
   try {
@@ -250,5 +253,31 @@ exports.generateCounsellingData = async (req, res) => {
       status: 'Data not found',
       error: err,
     });
+  }
+};
+
+exports.makePayment = async (req, res) => {
+  try {
+    const instance = new Razorpay({
+      key_id: rpayKey,
+      key_secret: rpaySecret,
+      headers: {
+        "X-Razorpay-Account": rpayMerchant
+      }
+    });
+    const options = {
+      amount: req.body.amount * 100, // amount in the smallest currency unit
+      currency: "INR",
+      receipt: shortid.generate(),
+      payment_capture: 1
+    };
+    const response = await instance.orders.create(options);
+    res.status(StatusCodes.OK).send({
+      id : response.id,
+      currency : response.currency,
+      amount : response.amount
+    })
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
   }
 };
