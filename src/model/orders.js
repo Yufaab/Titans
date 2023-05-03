@@ -37,19 +37,11 @@ const orderSchema = new mongoose.Schema({
         required: true,
         trim : [true, "Please provide your domicile state"]
     },
-    branchPreference: [{
-        name: {
-            type: String,
-            required: false,
-            trim: true
-        }
+    academicProgramName: [{
+        type: String,
     }],
-    collegePreference: [{
-        name: {
-            type: String,
-            required: false,
-            trim: true
-        }
+    institute: [{
+        type: String,
     }],
     examType: {
         type: String,
