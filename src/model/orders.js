@@ -27,11 +27,6 @@ const orderSchema = new mongoose.Schema({
         maxLength: 7,
         minLength: 1
     },
-    disability: {
-        type: Boolean,
-        required: true,
-        trim: true
-    },
     state: {
         type: String,
         required: true,
