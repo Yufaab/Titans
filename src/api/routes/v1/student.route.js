@@ -20,6 +20,6 @@ router.route('/order').get(studentAuth, studentController.getAllOrder);
 
 router.route('/generate/result').get(studentAuth, studentController.generateCounsellingData);
 
-router.route('/student/payment').post(studentAuth, studentController.makePayment);
+router.route('/payment').post(studentAuth, studentController.makePayment);
 
 module.exports = router;
