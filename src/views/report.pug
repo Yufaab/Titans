@@ -38,6 +38,9 @@ head
     border-radius: 100px;
     padding-left: 10px;
     }
+    .myClass {
+      font-size: 18px;
+    }
     th,
     td {
     padding: 0.5rem;
@@ -49,16 +52,16 @@ head
     font-weight: bold;
     }
 .input-container
-  label(for='input1') Rank:
-  input#input1(type='text' value=`${order.rank}`)
+  h3 Rank:
+  span.myClass #{order.rank}
   label(for='input2') Gender:
   input#input2(type='text' value=`${order.gender}`)
   label(for='input3') Seat Type:
   input#input3(type='text' value=`${order.seatType}`)
-  label(for='input3') Preferred Colleges:
-  input#input3(type='text' value=`${order.institute}`)
-  label(for='input3') Preferred Branches:
-  input#input3(type='text' value=`${order.academicProgramName}`)
+  //- label(for='input3') Preferred Colleges:
+  //- input#input3(type='text' value=`${order.institute}`)
+  //- label(for='input3') Preferred Branches:
+  //- input#input3(type='text' value=`${order.academicProgramName}`)
 table
   thead
     th Serial No.
