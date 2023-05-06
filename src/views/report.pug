@@ -38,8 +38,11 @@ head
     border-radius: 100px;
     padding-left: 10px;
     }
-    .myClass {
-      font-size: 18px;
+    div {
+      font-size: 12px;
+      display: block;
+      margin-top:7px;
+      color: #4a4a4a
     }
     th,
     td {
@@ -53,20 +56,23 @@ head
     }
     h3 {
       margin-left:10px;
-      font-size: 18px;
+      font-size: 14px;
       display: block;
+      font-style: bold;
+      font-weight:900;
+      color: #000;
     }
 .input-container
   h3 Rank:
-  span.myClass #{order.rank}
+    div #{order.rank}
   h3 Gender:
-  span.myClass #{order.gender}
+    div #{order.gender}
   h3 Seat Type:
-  span.myClass #{order.seatType}
+    div #{order.seatType}
   h3 Preferred Colleges:
-  span.myClass #{order.institute}
+    div #{order.institute}
   h3 Preferred Branches:
-  span.myClass #{order.academicProgramName}
+    div #{order.academicProgramName}
 table
   thead
     th Serial No.
