@@ -20,6 +20,8 @@ router.route('/order').get(studentAuth, studentController.getAllOrder);
 
 router.route('/generate/result/:orderid').get(studentAuth, studentController.generateCounsellingData);
 
+router.route('/generate/report/:orderid').get(studentAuth, studentController.generatePdfReport);
+
 router.route('/payment').post(studentAuth, studentController.makePayment);
 
 module.exports = router;

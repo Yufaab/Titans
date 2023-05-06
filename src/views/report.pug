@@ -1,0 +1,76 @@
+doctype html
+head
+  title Report
+  header Report
+  style(type='text/css').
+    table {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    color: #4a4a4a;
+    }
+    .input-container,header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    color: #4a4a4a;
+    }
+    header {
+    margin-top: 40px;
+    font-size: 28px;
+    font-weight: 700;
+    text-decoration: underline;
+    margin-bottom: 30px;
+    }
+    .input-container label {
+    margin-right: 0.5rem;
+    margin-left: .5rem;
+    color: #4a4a4a;
+    }
+    .input-container input {
+    flex: 1;
+    height: 30px;
+    border-radius: 100px;
+    padding-left: 10px;
+    }
+    th,
+    td {
+    padding: 0.5rem;
+    text-align: left;
+    border: 1px solid #ddd;
+    }
+    th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    }
+.input-container
+  label(for='input1') Rank:
+  input#input1(type='text' value=`${order.rank}`)
+  label(for='input2') Gender:
+  input#input2(type='text' value=`${order.gender}`)
+  label(for='input3') Seat Type:
+  input#input3(type='text' value=`${order.seatType}`)
+  label(for='input3') Preferred Colleges:
+  input#input3(type='text' value=`${order.institute}`)
+  label(for='input3') Preferred Branches:
+  input#input3(type='text' value=`${order.academicProgramName}`)
+table
+  thead
+    th Serial No.
+    th Academic Programe
+    th Institute
+    th Opening Rank
+    th Closing Rank
+  tbody
+    for data, index in collegeData
+      tr
+        td= index+1
+        td= data.academicProgramName
+        td= data.institute
+        td= data.openingRank
+        td= data.closingRank
