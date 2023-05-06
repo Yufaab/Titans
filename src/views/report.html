@@ -1,51 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Columns</title>
-	<style type="text/css">
+  <title>Report</title>
+  <header>Report</header>
+    <style type="text/css">
     table {
-        border-collapse: collapse;
-        width: 80%;
-        margin: 0 auto;
-        margin-bottom: 1rem;
+      border-collapse: collapse;
+      width: 80%;
+      margin: 0 auto;
+      margin-bottom: 1rem;
+	  color: #4a4a4a;
     }
-    th,td {
-        padding: 0.5rem;
-        text-align: left;
-        border: 1px solid #ddd;
+    .input-container,header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem;
+	  width: 80%;
+	  margin-left: auto;
+	  margin-right: auto;
+	  color: #4a4a4a;
+    }
+	header {
+		margin-top: 40px;
+		font-size: 28px;
+		font-weight: 700;
+		text-decoration: underline;
+		margin-bottom: 30px;
+	}
+  .input-container label {
+      margin-right: 0.5rem;
+	  margin-left: .5rem;
+	  color: #4a4a4a;
+    }
+    .input-container input {
+      flex: 1;
+	  height: 30px;
+	  border-radius: 100px;
+	  padding-left: 10px;
+    }
+    th,
+    td {
+      padding: 0.5rem;
+      text-align: left;
+      border: 1px solid #ddd;
     }
     th {
-        background-color: #f2f2f2;
-        font-weight: bold;
+      background-color: #f2f2f2;
+      font-weight: bold;
     }
-	</style>
+  </style>
 </head>
 <body>
-	<table>
-	  <thead>
-	    <tr>
-	      <th>Serial No.</th>
-	      <th>Quota</th>
-	      <th>Seat Type</th>
-          <th>Gender</th>
-	      <th>Academic Programe</th>
-	      <th>Institute</th>
-	      <th>Opening Rank</th>
-          <th>Closing Rank</th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	    <tr>
-	      <td>Row 1, Column 1</td>
-	      <td>Row 1, Column 2</td>
-	      <td>Row 1, Column 3</td>
-	      <td>Row 1, Column 4</td>
-	      <td>Row 1, Column 5</td>
-	      <td>Row 1, Column 6</td>
-	      <td>Row 1, Column 7</td>
-          <td>Row 1, Column 8</td>
-	    </tr>
-	  </tbody>
-	</table>
+  <div class="input-container">
+    <label for="input1">Input 1:</label>
+    <input type="text" id="input1" name="input1">
+    <label for="input2">Input 2:</label>
+    <input type="text" id="input2" name="input2">
+    <label for="input3">Input 3:</label>
+    <input type="text" id="input3" name="input3">
+  </div>
+  <table>
+    <thead>
+	    <th>Serial No.</th>
+	    <th>Quota</th>
+	    <th>Seat Type</th>
+        <th>Gender</th>
+	    <th>Academic Programe</th>
+	    <th>Institute</th>
+	    <th>Opening Rank</th>
+        <th>Closing Rank</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Row 1, Column 1</td>
+        <td>Row 1, Column 2</td>
+        <td>Row 1, Column 3</td>
+        <td>Row 1, Column 4</td>
+        <td>Row 1, Column 5</td>
+        <td>Row 1, Column 6</td>
+        <td>Row 1, Column 7</td>
+		<td>Row 1, Column 8</td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>
