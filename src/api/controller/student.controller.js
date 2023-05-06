@@ -6,6 +6,7 @@ const GoogleLogin = require('../../utils/googleLogin');
 const Orders = require('../../model/orders');
 const Counselling2022 = require('../../model/counselling2022');
 const { rpayKey, rpaySecret, rpayMerchant } = require('../../config/vars');
+const Render = require('../../utils/render');
 
 exports.loginStudent = async (req, res) => {
   try {
@@ -181,6 +182,75 @@ exports.generateCounsellingData = async (req, res) => {
   try {
     const { orderid } = req.params;
     const order = await Orders.findById(orderid);
+    const collegeData = await dataGenerator(order);
+    res.status(StatusCodes.OK).send({
+      status: 'Result generated successfully',
+      data: {
+        collegeData,
+      }
+    })
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).send({
+      status: 'Data not found',
+      error: err,
+    });
+  }
+};
+
+exports.makePayment = async (req, res) => {
+  try {
+    const instance = new Razorpay({
+      key_id: rpayKey,
+      key_secret: rpaySecret,
+      headers: {
+        "X-Razorpay-Account": rpayMerchant
+      }
+    });
+    const options = {
+      amount: req.body.amount * 100, // amount in the smallest currency unit
+      currency: "INR",
+      receipt: shortid.generate(),
+      payment_capture: 1
+    };
+    const response = await instance.orders.create(options);
+    res.status(StatusCodes.OK).send({
+      id : response.id,
+      currency : response.currency,
+      amount : response.amount
+    })
+  } catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
+  }
+};
+
+exports.generatePdfReport = async (req, res) => {
+  try {
+    const { orderid } = req.params;
+    const order = await Orders.findById(orderid);
+    const collegeData = await dataGenerator(order);
+    const pdfData = await Render.renderFile({
+      template: `src/views/report.pug`,
+      render: {
+        collegeData,
+        order,
+      }
+    })
+    res.status(StatusCodes.OK).send({
+      status: 'PDF generated successfully',
+      data: {
+        pdfData,
+      }
+    })
+  } catch (err) {
+    res.status(StatusCodes.BAD_REQUEST).send({
+      status: 'Data not found',
+      error: err,
+    });
+  }
+};
+
+const dataGenerator = async (order) => {
+  try {
     const { rank, gender, seatType, institute, academicProgramName } = order;
     const matcher = {
       openingRank : { 
@@ -244,42 +314,8 @@ exports.generateCounsellingData = async (req, res) => {
       !dataPref.some(obj => obj.openingRank === data.openingRank)
     );
     const collegeData = [ ...dataPref, ...filterData ];
-    res.status(StatusCodes.OK).send({
-      status: 'Result generated successfully',
-      data: {
-        collegeData,
-      }
-    })
+    return collegeData;
   } catch (err) {
-    res.status(StatusCodes.BAD_REQUEST).send({
-      status: 'Data not found',
-      error: err,
-    });
-  }
-};
-
-exports.makePayment = async (req, res) => {
-  try {
-    const instance = new Razorpay({
-      key_id: rpayKey,
-      key_secret: rpaySecret,
-      headers: {
-        "X-Razorpay-Account": rpayMerchant
-      }
-    });
-    const options = {
-      amount: req.body.amount * 100, // amount in the smallest currency unit
-      currency: "INR",
-      receipt: shortid.generate(),
-      payment_capture: 1
-    };
-    const response = await instance.orders.create(options);
-    res.status(StatusCodes.OK).send({
-      id : response.id,
-      currency : response.currency,
-      amount : response.amount
-    })
-  } catch (error) {
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
+    throw new Error(err);
   }
 };
