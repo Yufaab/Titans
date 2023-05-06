@@ -179,7 +179,9 @@ exports.deleteOrder = async (req, res) => {
 
 exports.generateCounsellingData = async (req, res) => {
   try {
-    const { rank, gender, seatType, institute, academicProgramName } = req.body;
+    const { orderid } = req.params;
+    const order = await Orders.findById(orderid);
+    const { rank, gender, seatType, institute, academicProgramName } = order;
     const matcher = {
       openingRank : { 
         $gte: rank 

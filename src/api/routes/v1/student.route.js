@@ -18,7 +18,7 @@ router.route('/order/:orderid').delete(studentAuth, studentController.deleteOrde
 
 router.route('/order').get(studentAuth, studentController.getAllOrder);
 
-router.route('/generate/result').get(studentAuth, studentController.generateCounsellingData);
+router.route('/generate/result/:orderid').get(studentAuth, studentController.generateCounsellingData);
 
 router.route('/payment').post(studentAuth, studentController.makePayment);
 
