@@ -1,4 +1,4 @@
-# Backend For Frontend (BFF)
+# Backend For Yufaab
 ## Steps to contribute
 1. Open the terminal and type command `git clone https://github.com/Yufaab/Titans.git`
 2. Use node version 16 and type the command `npm i`
