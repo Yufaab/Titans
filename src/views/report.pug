@@ -38,8 +38,11 @@ head
     border-radius: 100px;
     padding-left: 10px;
     }
-    .myClass {
-      font-size: 18px;
+    div {
+      font-size: 12px;
+      display: block;
+      margin-top:7px;
+      color: #4a4a4a
     }
     th,
     td {
@@ -51,17 +54,25 @@ head
     background-color: #f2f2f2;
     font-weight: bold;
     }
+    h3 {
+      margin-left:10px;
+      font-size: 14px;
+      display: block;
+      font-style: bold;
+      font-weight:900;
+      color: #000;
+    }
 .input-container
   h3 Rank:
-  span.myClass #{order.rank}
-  label(for='input2') Gender:
-  input#input2(type='text' value=`${order.gender}`)
-  label(for='input3') Seat Type:
-  input#input3(type='text' value=`${order.seatType}`)
-  //- label(for='input3') Preferred Colleges:
-  //- input#input3(type='text' value=`${order.institute}`)
-  //- label(for='input3') Preferred Branches:
-  //- input#input3(type='text' value=`${order.academicProgramName}`)
+    div #{order.rank}
+  h3 Gender:
+    div #{order.gender}
+  h3 Seat Type:
+    div #{order.seatType}
+  h3 Preferred Colleges:
+    div #{order.institute}
+  h3 Preferred Branches:
+    div #{order.academicProgramName}
 table
   thead
     th Serial No.
